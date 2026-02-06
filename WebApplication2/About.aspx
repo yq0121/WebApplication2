@@ -46,27 +46,33 @@
                         </div>
 
                         <!-- Items -->
-                        <li class="list-group-item px-0">
-                            <div class="d-flex justify-content-between">
-                                <strong>
-                                    <%# Eval("FoodName") %> 
-                                </strong>
-                                <span class="text-muted"> x <%# Eval("Quantity") %></span>
-                                <span>$<%# Eval("Subtotal") %></span>
-                            </div>
+                        <asp:Repeater ID="rptOrderItems" runat="server" DataSource='<%# Eval("Items") %>'>
+                            <ItemTemplate>
+                                <li class="list-group-item px-0">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>
+                                            <%# Eval("FoodName") %> 
+                                        </strong>
+                                        <span class="text-muted"> x <%# Eval("Quantity") %></span>
+                                        <div class="fw-semibold">
+                                            $<%# Eval("SubTotal", "{0:0.00}")%>
+                                        </div>
+                                    </div>
 
-                            <small class="text-muted d-block mt-1">
-                                <%# Eval("Flavor") != null && Eval("Flavor").ToString() != ""? "Flavor: " + Eval("Flavor"): ""%>
-                            </small>
+                                    <small class="text-muted d-block mt-1">
+                                        <%# Eval("Flavor") != null && Eval("Flavor").ToString() != ""? "Flavor: " + Eval("Flavor"): ""%>
+                                    </small>
 
-                            <small class="text-muted d-block mt-1">
-                                <%# Eval("Extras") != null && Eval("Extras").ToString() != ""? "Extras: " + Eval("Extras"): ""%>
-                            </small>
+                                    <small class="text-muted d-block mt-1">
+                                        <%# Eval("Extras") != null && Eval("Extras").ToString() != ""? "Extras: " + Eval("Extras"): ""%>
+                                    </small>
 
-                            <small class="text-muted d-block mt-1">
-                                <%# Eval("SpecialRequest") != null && Eval("SpecialRequest").ToString() != ""? "Note: " + Eval("SpecialRequest"): ""%>
-                            </small>
-                        </li>
+                                    <small class="text-muted d-block mt-1">
+                                        <%# Eval("SpecialRequest") != null && Eval("SpecialRequest").ToString() != ""? "Note: " + Eval("SpecialRequest"): ""%>
+                                    </small>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
 
                         <!-- Total -->
                         <div class="text-end mt-2 fw-bold">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -36,6 +37,19 @@ namespace WebApplication2
                 lblFoodName.Text = food.FoodName;
                 lblPrice.Text = food.Price.ToString("0.00");
                 imgFood.Src = food.ImageUrl;
+
+                string fullDesc = food.Description ?? "";
+                string preview = fullDesc;
+
+                fullDesc = fullDesc.Replace("\n", "<br />");
+                if (preview.Length > 100)
+                {
+                    preview = preview.Substring(0, 100) + "...";
+                }
+
+                litDescription.Text = preview;
+                litFullDescription.Text = fullDesc;
+                lblModalFoodName.Text = food.FoodName;
 
                 // 4️⃣ Control option panels by category
                 pnlDrinkOptions.Visible = false;

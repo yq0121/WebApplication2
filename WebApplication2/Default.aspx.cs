@@ -108,28 +108,32 @@ namespace WebApplication2
                     FoodName = "Burger",
                     Category = "Burger",
                     Price = 12,
-                    ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349"
+                    ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349",
+                    Description = "Juicy grilled beef patty served with fresh lettuce, tomatoes, and melted cheese in a soft bun. Perfect for a satisfying and hearty meal."
                 },
                 new Food {
                     FoodId = 2,
                     FoodName = "Pizza",
                     Category = "Pizza",
                     Price = 15,
-                    ImageUrl = "https://images.unsplash.com/photo-1601924638867-3ec62b7d6f2b"
+                    ImageUrl = "https://images.unsplash.com/photo-1601924638867-3ec62b7d6f2b",
+                    Description = "Hot and freshly baked pizza topped with rich tomato sauce, melted mozzarella cheese, and a crispy crust that delivers comfort in every bite."
                 },
                 new Food {
                     FoodId = 3,
                     FoodName = "Drink",
                     Category = "Drink",
                     Price = 5,
-                    ImageUrl = "https://images.unsplash.com/photo-1544145945-f90425340c7e"
+                    ImageUrl = "https://images.unsplash.com/photo-1544145945-f90425340c7e",
+                    Description = "Refreshing cold beverage to quench your thirst. Choose your preferred sugar and ice level for the perfect drink experience."
                 },
                 new Food {
                     FoodId = 4,
                     FoodName = "Dessert",
                     Category = "Dessert",
                     Price = 8,
-                    ImageUrl = "https://images.unsplash.com/photo-1505253216365-2d6c1a49e4b4"
+                    ImageUrl = "https://images.unsplash.com/photo-1505253216365-2d6c1a49e4b4",
+                    Description = "Sweet and delightful dessert made to satisfy your cravings. Soft, creamy, and perfectly balanced for a delightful ending to your meal."
                 }
             };
         }

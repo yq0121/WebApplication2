@@ -51,6 +51,15 @@ namespace WebApplication2
         protected global::System.Web.UI.WebControls.Label lblPrice;
 
         /// <summary>
+        /// litDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litDescription;
+
+        /// <summary>
         /// pnlDrinkOptions control.
         /// </summary>
         /// <remarks>
@@ -148,5 +157,23 @@ namespace WebApplication2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btAddToCart;
+
+        /// <summary>
+        /// lblModalFoodName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblModalFoodName;
+
+        /// <summary>
+        /// litFullDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFullDescription;
     }
 }
