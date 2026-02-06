@@ -1,0 +1,299 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication2.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+        }
+
+        body.dark{
+            background: #121212;
+            color: #eee;
+        }
+
+        body.dark .card{
+            background: #1e1e1e;
+            color: #eee;
+        }
+
+        body.dark{
+            color: #9ecbff;
+        }
+
+        .page-layout{
+            display: flex;
+            height: 100vh;
+        }
+
+        .left-sidebar{
+            width: 220px;
+            background: #212529;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        .left-sidebar.hide{
+            width: 0;
+        }
+
+        .left-sidebar .brand {
+            padding: 16px;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+        }
+
+        .left-sidebar a {
+            color: #ccc;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .left-sidebar a:hover{
+            background: #343a40;
+        }
+
+        .main-content{
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            overflow: auto;
+        }
+
+        .toggle-btn{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 220px;
+
+            width: 22px;
+            height: 44px;
+            background: #2c2c2c;
+            color: #bbb;
+            cursor: pointer;
+            border-radius: 0 6px 6px 0;
+            text-align: center;
+            line-height: 44px;
+            font-size: 16px;
+            transition: left 0.3s ease;
+            user-select: none;
+            z-index: 1000;
+        }
+
+        .left-sidebar.hide + .toggle-btn{
+            left:0;
+        }
+
+        .user-area{
+            margin-top: auto;
+            padding: 10px 12px;
+            border-top: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #282525;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .user-name{
+            font-size: 14px;
+            color: #ccc;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
+        }
+
+        .user-trigger{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .avatar{
+            width: 32px;
+            height: 32px;
+            background: #6f42c1;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-menu{
+            position: absolute;
+            bottom: 50px;
+            left: 10px;
+            background: #1f1f1f;
+            border-radius: 8px;
+            width: 180px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            padding: 8px 0;
+            display: none;
+            z-index: 2000;
+        }
+
+        .user-menu a,
+        .user-menu .menu-logout{
+            display: block;
+            padding: 10px 14px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .user-menu a:hover,
+        .user-menu .menu-logout:hover{
+            background: #343a40;
+            color: white;
+        }
+
+        .user-menu hr{
+            border-color: #444;
+            margin: 6px 0;
+        }
+
+    </style>
+</head>
+<body class="<%=Session["Theme"] ?? "light" %>">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="page-layout">
+            <div id="sidebar" class="left-sidebar">
+                <div class="brand">
+                    Food Ordering System
+                </div>
+
+                <a runat="server" href="~/"> Home</a>
+                <a runat="server" href="~/Cart.aspx" style="position:relative;">
+                    🛒 Cart
+                    <span class="badge bg-danger" 
+                            style="position:absolute; top:8px; right:20px;">
+                        <asp:Label ID="lblCartCount" runat="server" Text="0"></asp:Label>
+                    </span>
+                </a>
+                <a runat="server" href="~/About">
+                    <i class="bi bi-clock-history me-2"></i> History
+                </a>
+                <a runat="server" href="~/Contact"> Contact</a>
+
+                <div class="user-area dropdown">
+                    <div class="user-trigger" onclick="toggleUserMenu()">
+                        <div class="avatar">
+                            <%:(Session["Username"] != null ? Session["Username"].ToString().Substring(0, 1).ToUpper() : "G") %>
+                        </div>
+                        <span class="user-name">
+                            <%: Session["Username"] != null ? Session["Username"].ToString() : "Guest" %>
+                        </span>
+                        <i class="bi bi-chevron-up"></i>
+                    </div>
+
+                    <!-- Dropdown menu -->
+                    <div id="userMenu" class="user-menu">
+                        <a href="Profile.aspx"><i class="bi bi-person"></i> Profile</a>
+                        <a href="Settings.aspx"><i class="bi bi-gear"></i> Settings</a>
+                        <hr />
+                        <asp:LinkButton ID="btnLogout" runat="server" 
+                            CssClass="menu-logout" OnClick="btnLogout_Click">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+
+            <div id="toggleBtn" class="toggle-btn" onclick="toggleSidebar()"></div>
+
+            <div class="main-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    
+                </asp:ContentPlaceHolder>
+
+                <hr />
+                <footer>
+                    <p>&copy; <%: DateTime.Now.Year %>  - My ASP.NET Application</p>
+                </footer>
+            </div>
+        </div>
+    </form>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var btn = document.getElementById("toggleBtn");
+
+            sidebar.classList.toggle("hide");
+
+            if (sidebar.classList.contains("hide")) {
+                btn.innerHTML = ">";
+            } else {
+                btn.innerHTML = "<";
+            }
+        }
+
+        function toggleUserMenu() {
+            var menu = document.getElementById("userMenu");
+            if (menu.style.display === "block") {
+                menu.style.display = none;
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
+        document.addEventListener("click", function (e) {
+            var triggle = document.querySelector(".user-trigger");
+            var menu = document.getElementById("userMenu");
+
+            if (!trigger.contains(e.target) && !menu.contains(e.target)) {
+                menu.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
