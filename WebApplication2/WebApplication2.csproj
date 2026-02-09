@@ -128,6 +128,7 @@
     <Content Include="Login-Register-ForgotPwd\ForgotPassword.aspx" />
     <Content Include="Login-Register-ForgotPwd\Login.aspx" />
     <Content Include="Login-Register-ForgotPwd\Register.aspx" />
+    <Content Include="OrderConfirm.aspx" />
     <Content Include="OrderDetail.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="ResetPassword.aspx" />
@@ -266,6 +267,13 @@
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="OrderConfirm.aspx.cs">
+      <DependentUpon>OrderConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderConfirm.aspx.designer.cs">
+      <DependentUpon>OrderConfirm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OrderDetail.aspx.cs">
       <DependentUpon>OrderDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

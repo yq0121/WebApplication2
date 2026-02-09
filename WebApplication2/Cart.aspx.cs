@@ -128,12 +128,12 @@ namespace WebApplication2
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
             var cart = Session["Cart"] as List<CartItem>;
-            if(cart == null || cart.Count == 0)
+            if (cart == null || cart.Count == 0)
             {
                 return;
             }
 
-            List<Order> orders = Session["Orders"] as List<Order>; 
+            List<Order> orders = Session["Orders"] as List<Order>;
 
             if (orders == null)
             {
@@ -166,7 +166,7 @@ namespace WebApplication2
             Session["Orders"] = orders;
 
             Session["Cart"] = null;
-            Response.Redirect("~/OrderDetail.aspx");
+            Response.Redirect("~/OrderConfirm.aspx");
         }
     }
 }
