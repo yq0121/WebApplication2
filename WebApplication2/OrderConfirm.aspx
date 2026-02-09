@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Order Confirm" Language="C#" MasterPageFile="~/Site.Master"
+<%@ Page Title="Order Confirm" Language="C#" MasterPageFile="~/Site.Master"
     AutoEventWireup="true" CodeBehind="OrderConfirm.aspx.cs"
     Inherits="WebApplication2.OrderConfirm" %>
 
@@ -35,10 +35,10 @@
                 CssClass="table table-bordered table-hover"
                 AutoGenerateColumns="False">
                 <Columns>
-                    <asp:BoundField DataField="ItemName" HeaderText="Item Name" />
+                    <asp:BoundField DataField="FoodName" HeaderText="Item Name" />
                     <asp:BoundField DataField="Quantity" HeaderText="Qty" />
                     <asp:BoundField DataField="Price" HeaderText="Price ($)" />
-                    <asp:BoundField DataField="Subtotal" HeaderText="Subtotal ($)" />
+                    <asp:BoundField DataField="SubTotal" HeaderText="Subtotal ($)" />
                 </Columns>
             </asp:GridView>
 
@@ -56,7 +56,7 @@
         <!-- Footer -->
         <div class="card-footer text-end">
             <asp:Button ID="btnConfirm" runat="server"
-                Text="✅ Confirm Order"
+                Text="✔ Confirm Order"
                 CssClass="btn btn-success"
                 OnClick="btnConfirm_Click" />
 

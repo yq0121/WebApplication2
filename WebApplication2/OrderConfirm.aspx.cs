@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -28,22 +28,27 @@ namespace WebApplication2
 
         private void LoadOrderDetails()
         {
-            var cart = Session["Cart"] as List<CartItem>;
+            var orders = Session["Orders"] as List<Order>;
 
-            if (cart == null || cart.Count == 0)
+            if (orders == null || orders.Count == 0)
             {
                 Response.Redirect("Default.aspx");
                 return;
             }
 
-            gvOrderDetails.DataSource = cart;
+            // Get the latest order
+            var latestOrder = orders.LastOrDefault();
+
+            if (latestOrder == null)
+            {
+                Response.Redirect("Default.aspx");
+                return;
+            }
+
+            gvOrderDetails.DataSource = latestOrder.Items;
             gvOrderDetails.DataBind();
 
-            decimal total = 0;
-            foreach (var item in cart)
-                total += item.SubTotal;
-
-            lblTotal.Text = total.ToString("0.00");
+            lblTotal.Text = latestOrder.Total.ToString("0.00");
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)

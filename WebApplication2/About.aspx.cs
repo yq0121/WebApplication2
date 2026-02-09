@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
@@ -57,6 +57,7 @@ namespace WebApplication2
             LoadOrders(result);
         }
 
+        
         protected void rptOrders_ItemCommand(object sender, RepeaterCommandEventArgs e)
         {
             if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
@@ -66,5 +67,6 @@ namespace WebApplication2
             rptItems.DataSource = order.Items ?? new List<OrderItem>();
             rptItems.DataBind();
         }
+        
     }
 }
