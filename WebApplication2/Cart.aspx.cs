@@ -150,6 +150,7 @@ namespace WebApplication2
             {
                 OrderId = newOrderId,
                 OrderDate = DateTime.Now,
+                Status = OrderStatus.Pending,
                 Items = cart.Select(c => new OrderItem
                 {
                     FoodName = c.FoodName,

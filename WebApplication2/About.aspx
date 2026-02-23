@@ -15,6 +15,17 @@
                     Placeholder="Search by Order ID..."></asp:TextBox>
             </div>
 
+            <!-- Add New Filter -->
+            <div class="col-md-3">
+                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-select">
+                    <asp:ListItem Text="All Status" Value=""></asp:ListItem>
+                    <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
+                    <asp:ListItem Text="Preparing" Value="Preparing"></asp:ListItem>
+                    <asp:ListItem Text="Confirmed" Value="Confirmed"></asp:ListItem>
+                    <asp:ListItem Text=" Cancelled" Value="Cancelled"></asp:ListItem>
+                </asp:DropDownList> 
+            </div>
+
             <div class="col-md-2">
                 <asp:Button ID="btnSearch" runat="server" Text="Search" 
                     CssClass="btn btn-primary w-100" OnClick="btnSearch_Click" />
@@ -24,7 +35,7 @@
         <!-- Order -->
         <asp:Repeater ID="rptOrders" runat="server" OnItemCommand="rptOrders_ItemCommand">
             <ItemTemplate>
-                <div class="card mb-3 shadow-sm p-3">
+                <div class='<%# GetCardClass(Eval("Status").ToString()) %>'>
                     <div class="card-body">
 
                         <!-- Header -->
@@ -37,6 +48,10 @@
                                 <small class="text-muted">
                                     <%# Eval("OrderDate") == null ? "" : Eval("OrderDate") %>
                                 </small>
+
+                                <span class='<%# GetStatusClass(Eval("Status") == null ? "" : Eval("Status").ToString()) %>' >
+                                    Status: <%# Eval("Status") %>
+                                </span>
                             </div>
 
                             <a href='OrderDetail.aspx?id=<%# Eval("OrderId") %>'

@@ -44,17 +44,21 @@ namespace WebApplication2
             if (orders == null) return;
 
             string keyword = txtSearch.Text.Trim();
+            string selectedStatus = ddlStatus.SelectedValue;
 
-            var result = orders;
+            var result = orders.AsQueryable();
 
             if (!string.IsNullOrEmpty(keyword))
             {
-                result = orders
-                    .Where(o => o.OrderId.ToString().Contains(keyword))
-                    .ToList();
+                result = result.Where(o => o.OrderId.ToString().Contains(keyword));
+            } 
+            
+            if (!string.IsNullOrEmpty(selectedStatus))
+            {
+                result = result.Where(o => o.Status.ToString() == (selectedStatus));
             }
 
-            LoadOrders(result);
+            LoadOrders(result.ToList());
         }
 
         protected void rptOrders_ItemCommand(object sender, RepeaterCommandEventArgs e)
@@ -65,6 +69,33 @@ namespace WebApplication2
             var rptItems = e.Item.FindControl("rptItems") as Repeater;
             rptItems.DataSource = order.Items ?? new List<OrderItem>();
             rptItems.DataBind();
+        }
+
+        protected string GetStatusClass(string status)
+        {
+            switch (status)
+            {
+                case "Pending":
+                    return "badge badge-warning";
+                case "Preparing":
+                    return "badge badge-primary";
+                case "Confirmed":
+                    return "badge badge-success";
+                case "Cancelled":
+                    return "badge badge-danger";
+                default:
+                    return "badge badge-secondary";
+            }
+        }
+
+        protected string GetCardClass(string status)
+        {
+            if(status == "Completed")
+            {
+                return "card mb-3 shadow-sm p-3 bg-light text-muted";
+            }
+
+            return "card mb-3 shadow-sm p-3";
         }
     }
 }
