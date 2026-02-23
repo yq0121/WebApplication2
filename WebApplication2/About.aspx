@@ -22,7 +22,7 @@
                     <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
                     <asp:ListItem Text="Preparing" Value="Preparing"></asp:ListItem>
                     <asp:ListItem Text="Confirmed" Value="Confirmed"></asp:ListItem>
-                    <asp:ListItem Text=" Cancelled" Value="Cancelled"></asp:ListItem>
+                    <asp:ListItem Text="Cancelled" Value="Cancelled"></asp:ListItem>
                 </asp:DropDownList> 
             </div>
 
@@ -35,7 +35,7 @@
         <!-- Order -->
         <asp:Repeater ID="rptOrders" runat="server" OnItemCommand="rptOrders_ItemCommand">
             <ItemTemplate>
-                <div class='<%# GetCardClass(Eval("Status").ToString()) %>'>
+                <div class="card mb-3 shadow-sm p-3">
                     <div class="card-body">
 
                         <!-- Header -->
@@ -49,7 +49,7 @@
                                     <%# Eval("OrderDate") == null ? "" : Eval("OrderDate") %>
                                 </small>
 
-                                <span class='<%# GetStatusClass(Eval("Status") == null ? "" : Eval("Status").ToString()) %>' >
+                                <span class='<%# GetStatusClass(Eval("Status") == null ? "" : Eval("Status").ToString()) %>'>
                                     Status: <%# Eval("Status") %>
                                 </span>
                             </div>

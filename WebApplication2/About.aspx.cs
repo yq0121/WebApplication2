@@ -71,9 +71,9 @@ namespace WebApplication2
             rptItems.DataBind();
         }
 
-        protected string GetStatusClass(string status)
+        protected string GetStatusClass(string Status)
         {
-            switch (status)
+            switch (Status)
             {
                 case "Pending":
                     return "badge badge-warning";
