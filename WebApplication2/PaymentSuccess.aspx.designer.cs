@@ -11,34 +11,43 @@ namespace WebApplication2
 {
 
 
-    public partial class _Default
+    public partial class PaymentSuccess
     {
 
         /// <summary>
-        /// rblPrice control.
+        /// litOrderId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblPrice;
+        protected global::System.Web.UI.WebControls.Literal litOrderId;
 
         /// <summary>
-        /// rptFoods control.
+        /// litMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptFoods;
+        protected global::System.Web.UI.WebControls.Literal litMethod;
 
         /// <summary>
-        /// pnlEmpty control.
+        /// litRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlEmpty;
+        protected global::System.Web.UI.WebControls.Literal litRef;
+
+        /// <summary>
+        /// lnkBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkBack;
     }
 }

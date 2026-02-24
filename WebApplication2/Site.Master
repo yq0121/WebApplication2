@@ -17,6 +17,9 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         html, body{
             height: 100%;
@@ -37,85 +40,11 @@
             color: #9ecbff;
         }
 
-        .page-layout{
-            display: flex;
-            height: 100vh;
-        }
-
-        .left-sidebar{
-            width: 220px;
-            background: #212529;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            transition: width 0.3s ease;
-            overflow: hidden;
-            overflow-y: auto;
-        }
-
-        .left-sidebar.hide{
-            width: 0;
-        }
-
-        .left-sidebar .brand {
-            padding: 16px;
-            font-size: 20px;
-            font-weight: bold;
-            border-bottom: 1px solid #333;
-        }
-
-        .left-sidebar a {
-            color: #ccc;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .left-sidebar a:hover{
-            background: #343a40;
-        }
-
         .main-content{
             flex: 1;
             padding: 20px;
             overflow-y: auto;
             overflow: auto;
-        }
-
-        .toggle-btn{
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 220px;
-
-            width: 22px;
-            height: 44px;
-            background: #2c2c2c;
-            color: #bbb;
-            cursor: pointer;
-            border-radius: 0 6px 6px 0;
-            text-align: center;
-            line-height: 44px;
-            font-size: 16px;
-            transition: left 0.3s ease;
-            user-select: none;
-            z-index: 1000;
-        }
-
-        .left-sidebar.hide + .toggle-btn{
-            left:0;
-        }
-
-        .user-area{
-            margin-top: auto;
-            padding: 10px 12px;
-            border-top: 1px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #282525;
-            position: relative;
-            cursor: pointer;
         }
 
         .user-name{
@@ -125,13 +54,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 140px;
-        }
-
-        .user-trigger{
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
         }
 
         .avatar{
@@ -145,40 +67,6 @@
             font-weight: bold;
             font-size: 14px;
         }
-
-        .user-menu{
-            position: absolute;
-            bottom: 50px;
-            left: 10px;
-            background: #1f1f1f;
-            border-radius: 8px;
-            width: 180px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            padding: 8px 0;
-            display: none;
-            z-index: 2000;
-        }
-
-        .user-menu a,
-        .user-menu .menu-logout{
-            display: block;
-            padding: 10px 14px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .user-menu a:hover,
-        .user-menu .menu-logout:hover{
-            background: #343a40;
-            color: white;
-        }
-
-        .user-menu hr{
-            border-color: #444;
-            margin: 6px 0;
-        }
-
     </style>
 </head>
 <body class="<%=Session["Theme"] ?? "light" %>">
@@ -201,99 +89,71 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+        
+        <!-- 🔥 Top Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
 
-        <div class="page-layout">
-            <div id="sidebar" class="left-sidebar">
-                <div class="brand">
-                    Food Ordering System
-                </div>
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-danger" href="~/">
+                FoodOrder
+            </a>
 
-                <a runat="server" href="~/"> Home</a>
-                <a runat="server" href="~/Cart.aspx" style="position:relative;">
-                    🛒 Cart
-                    <span class="badge bg-danger" 
-                            style="position:absolute; top:8px; right:20px;">
+            <!-- Search Bar -->
+            <div class="mx-auto" style="width: 40%;">
+                <asp:TextBox ID="txtGlobalSearch" runat="server" CssClass="form-control" placeholder="Search restaurants or food..." />
+            </div>
+
+            <%--<div>
+                <asp:Button ID="btnSearch" runat="server"
+                    CssClass="btn btn-outline-secondary"
+                    Text="Search"
+                    OnClick="btnSearch_Click" />
+            </div>--%>
+
+            <!-- Right Menu -->
+            <div class="d-flex align-items-center gap-3">
+
+                <!-- Cart -->
+                <a runat="server" href="~/Cart.aspx" class="btn btn-outline-dark position-relative">
+                    🛒
+                    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
                         <asp:Label ID="lblCartCount" runat="server" Text="0"></asp:Label>
                     </span>
                 </a>
-                <a runat="server" href="~/About">
-                    <i class="bi bi-clock-history me-2"></i> History
-                </a>
-                <a runat="server" href="~/Contact"> Contact</a>
 
-                <div class="user-area dropdown">
-                    <div class="user-trigger" onclick="toggleUserMenu()">
-                        <div class="avatar">
-                            <%:(Session["Username"] != null ? Session["Username"].ToString().Substring(0, 1).ToUpper() : "G") %>
+                <!-- User -->
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" style="cursor:pointer;">
+                        <div class="avatar me-2">
+                            <%:(Session["Username"] != null ? Session["Username"].ToString().Substring(0,1).ToUpper() : "G") %>
                         </div>
-                        <span class="user-name">
-                            <%: Session["Username"] != null ? Session["Username"].ToString() : "Guest" %>
+                        <span>
+                            <%:Session["Username"] ?? "Guest" %>
                         </span>
-                        <i class="bi bi-chevron-up"></i>
-                    </div>
+                    </a>
 
-                    <!-- Dropdown menu -->
-                    <div id="userMenu" class="user-menu">
-                        <a href="Profile.aspx"><i class="bi bi-person"></i> Profile</a>
-                        <a href="Settings.aspx"><i class="bi bi-gear"></i> Settings</a>
-                        <hr />
-                        <asp:LinkButton ID="btnLogout" runat="server" 
-                            CssClass="menu-logout" OnClick="btnLogout_Click">
-                            <i class="bi bi-box-arrow-right"></i> Logout
-                        </asp:LinkButton>
-                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="Profile.aspx">Profile</a></li>
+                        <li><a class="dropdown-item" href="Settings.aspx">Settings</a></li>
+                        <li><hr class="dropdown-divider" /></li> 
+                        <li>
+                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="btnLogout_Click">
+                                Logout
+                            </asp:LinkButton>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
 
-            <div id="toggleBtn" class="toggle-btn" onclick="toggleSidebar()"></div>
-
-            <div class="main-content">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                    
-                </asp:ContentPlaceHolder>
-
-                <hr />
-                <footer>
-                    <p>&copy; <%: DateTime.Now.Year %>  - My ASP.NET Application</p>
-                </footer>
-            </div>
+        <!-- 🔥 Main Content -->
+        <div class="container-fluid mt-4">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
     </asp:PlaceHolder>
 
-    <script>
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            var btn = document.getElementById("toggleBtn");
-
-            sidebar.classList.toggle("hide");
-
-            if (sidebar.classList.contains("hide")) {
-                btn.innerHTML = ">";
-            } else {
-                btn.innerHTML = "<";
-            }
-        }
-
-        function toggleUserMenu() {
-            var menu = document.getElementById("userMenu");
-            if (menu.style.display === "block") {
-                menu.style.display = none;
-            } else {
-                menu.style.display = "block";
-            }
-        }
-
-        document.addEventListener("click", function (e) {
-            var triggle = document.querySelector(".user-trigger");
-            var menu = document.getElementById("userMenu");
-
-            if (!trigger.contains(e.target) && !menu.contains(e.target)) {
-                menu.style.display = "none";
-            }
-        });
-    </script>
 </body>
 </html>

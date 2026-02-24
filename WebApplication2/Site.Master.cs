@@ -22,26 +22,19 @@ namespace WebApplication2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            { 
                 UpdateCartCount();
-            }
         }
 
         private void UpdateCartCount()
         {
-            if (Session["Cart"] != null)
-            {
-                var cart = Session["Cart"] as List<WebApplication2.Models.CartItem>;
+            var cart = Session["Cart"] as List<CartItem>;
 
-                int totalQty = 0;
-                foreach (var item in cart)
-                {
-                    totalQty += item.Quantity;
-                }
+            if (cart != null && cart.Count > 0)
+            {
+                int totalQty = cart.Sum(x => x.Quantity);
 
                 lblCartCount.Text = totalQty.ToString();
-                lblCartCount.Visible = totalQty > 0;
+                lblCartCount.Visible = true;
             }
             else
             {
@@ -49,6 +42,16 @@ namespace WebApplication2
                 lblCartCount.Visible = false;
             }
         }
+
+        //protected void btnsearch_click(object sender, eventargs e)
+        //{
+        //    string keyword = txtglobalsearch.text.trim();
+
+        //    if (!string.isnullorempty(keyword))
+        //    {
+        //        response.redirect("~/search.aspx?q=" + keyword);
+        //    }
+        //}
 
     }
 }

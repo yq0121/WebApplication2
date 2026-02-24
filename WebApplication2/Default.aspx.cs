@@ -14,16 +14,78 @@ namespace WebApplication2
             if (!IsPostBack)
             {
                 // 初始化分類
-                Session["CurrentCategory"] = "All";
+                if(Session["CurrentCategory"] == null)
+                    Session["CurrentCategory"] = "All";
 
                 // 初始化 Food 資料（之後可換 DB）
                 if (Session["Foods"] == null)
-                {
                     Session["Foods"] = GetFoods();
-                }
 
                 BindFoods();
-                Page.DataBind();
+            }
+        }
+
+        protected void PriceFilter_Changed(object sender, EventArgs e)
+        {
+            BindFoods();
+        }
+
+        private void BindFoods()
+        {
+            var foods = Session["Foods"] as List<Food>;
+            if (foods == null) return;
+
+            string category = Session["CurrentCategory"]?.ToString() ?? "All";
+            string priceFilter = rblPrice.SelectedValue;
+
+            var result = foods.AsEnumerable();
+
+            // Category
+            if (category != "All")
+            {
+                result = result.Where(f => f.Category == category);
+                HightlightCategory();
+            }
+
+            // Price
+            if (priceFilter == "Low")
+                result = result.Where(f => f.Price > 10);
+            else if (priceFilter == "Mid")
+                result = result.Where(f => f.Price >= 10 && f.Price <= 15);
+            else if (priceFilter == "High")
+                result = result.Where(f => f.Price > 15);
+
+            var finalList = result.ToList();
+
+            rptFoods.DataSource = finalList;
+            rptFoods.DataBind();
+
+            pnlEmpty.Visible = finalList.Count == 0;
+        }
+
+        private void HightlightCategory()
+        {
+            string current = Session["CurrentCategory"]?.ToString() ?? "All";
+
+            foreach(Control c in Page.Controls)
+            {
+                HighlightRecursive(c, current);
+            }
+        }
+
+        private void HighlightRecursive(Control parent, string current)
+        {
+            foreach(Control c in parent.Controls)
+            {
+                if (c is LinkButton btn)
+                {
+                    if (btn.CommandArgument == current)
+                        btn.CssClass = "btn btn-primary w-100 mb-2";
+                    else
+                        btn.CssClass = "btn btn-outline-secondary w-100 mb-2";
+                }
+
+                HighlightRecursive(c, current);
             }
         }
 
@@ -35,46 +97,6 @@ namespace WebApplication2
             string category = e.CommandArgument.ToString();
 
             Session["CurrentCategory"] = category;
-
-            BindFoods();
-
-            Page.DataBind();
-        }
-
-        /* =======================
-           Search
-        ======================= */
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            BindFoods();
-        }
-
-        /* =======================
-           Bind Food (Category + Search)
-        ======================= */
-        private void BindFoods()
-        {
-            var foods = Session["Foods"] as List<Food>;
-            if (foods == null) return;
-
-            string category = Session["CurrentCategory"].ToString();
-            string keyword = txtSearch.Text.Trim().ToLower();
-
-            var result = foods.AsEnumerable();
-
-            if (category != "All")
-            {
-                result = result.Where(f => f.Category == category);
-            }
-
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                result = result.Where(f =>
-                    f.FoodName.ToLower().Contains(keyword));
-            }
-
-            rptFoods.DataSource = result.ToList();
-            rptFoods.DataBind();
         }
 
         /* =======================

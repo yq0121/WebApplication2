@@ -167,7 +167,7 @@ namespace WebApplication2
             Session["Orders"] = orders;
 
             Session["Cart"] = null;
-            Response.Redirect("~/OrderDetail.aspx");
+            Response.Redirect("~/OrderConfirm.aspx?id=" + newOrderId);
         }
     }
 }

@@ -76,15 +76,15 @@ namespace WebApplication2
             switch (Status)
             {
                 case "Pending":
-                    return "badge badge-warning";
+                    return "bg bg-warning";
                 case "Preparing":
-                    return "badge badge-primary";
+                    return "bg bg-primary";
                 case "Confirmed":
-                    return "badge badge-success";
+                    return "bg bg-success";
                 case "Cancelled":
-                    return "badge badge-danger";
+                    return "bg bg-danger";
                 default:
-                    return "badge badge-secondary";
+                    return "bg bg-secondary";
             }
         }
 
