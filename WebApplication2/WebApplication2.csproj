@@ -134,6 +134,7 @@
     <Content Include="PaymentSuccess.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="ResetPassword.aspx" />
+    <Content Include="RestaurantMenu.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -269,6 +270,7 @@
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\Restaurant.cs" />
     <Compile Include="OrderConfirm.aspx.cs">
       <DependentUpon>OrderConfirm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,6 +313,13 @@
     </Compile>
     <Compile Include="ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RestaurantMenu.aspx.cs">
+      <DependentUpon>RestaurantMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RestaurantMenu.aspx.designer.cs">
+      <DependentUpon>RestaurantMenu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>

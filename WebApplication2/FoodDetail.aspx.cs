@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 using WebApplication2.Models;
 
 namespace WebApplication2
@@ -51,26 +52,29 @@ namespace WebApplication2
                 litFullDescription.Text = fullDesc;
                 lblModalFoodName.Text = food.FoodName;
 
-                // 4️⃣ Control option panels by category
-                pnlDrinkOptions.Visible = false;
-                pnlDessertOptions.Visible = false;
-                pnlFoodOptions.Visible = false;
-
-                if (food.Category == "Drink")
-                {
-                    pnlDrinkOptions.Visible = true;
-                }
-                else if (food.Category == "Dessert")
-                {
-                    pnlDessertOptions.Visible = true;
-                }
-                else
-                {
-                    // Burger / Pizza / Other food
-                    pnlFoodOptions.Visible = true;
-                }
+                LoadOptions(food);
 
                 txtSpecialRequest.Visible = true;
+            }
+        }
+
+        private void LoadOptions(Food food)
+        {
+            pnlFlavor.Visible = false;
+            pnlExtras.Visible = false;
+
+            if (food.Flavors != null && food.Flavors.Any())
+            {
+                pnlFlavor.Visible = true;
+                ddlFlavor.DataSource = food.Flavors;
+                ddlFlavor.DataBind();
+            }
+
+            if (food.Extras != null && food.Extras.Any())
+            {
+                pnlExtras.Visible = true;
+                cblExtras.DataSource = food.Extras;
+                cblExtras.DataBind();
             }
         }
 
@@ -86,35 +90,14 @@ namespace WebApplication2
             string flavor = "";
             string extras = "";
 
-            // 🧋 Drink
-            if (food.Category == "Drink")
-            {
-                flavor = ddlSugarLevel.SelectedValue;
-
-                extras = string.Join(",",
-                    rblIceLevel.Items.Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value));
-            }
-            // 🍰 Dessert
-            else if (food.Category == "Dessert")
-            {
-                flavor = ddlDessertFlavor.SelectedValue;
-
-                extras = string.Join(",",
-                    cblDessertExtras.Items.Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value));
-            }
-            // 🍔 Food
-            else
+            if (pnlFlavor.Visible)
             {
                 flavor = ddlFlavor.SelectedValue;
+            }
 
-                extras = string.Join(",",
-                    cblExtras.Items.Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value));
+            if (pnlExtras.Visible)
+            {
+                extras = string.Join(",", cblExtras.Items.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
             }
 
             string specialRequest = txtSpecialRequest.Text;

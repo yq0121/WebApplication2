@@ -60,67 +60,13 @@ namespace WebApplication2
         protected global::System.Web.UI.WebControls.Literal litDescription;
 
         /// <summary>
-        /// pnlDrinkOptions control.
+        /// pnlFlavor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDrinkOptions;
-
-        /// <summary>
-        /// ddlSugarLevel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSugarLevel;
-
-        /// <summary>
-        /// rblIceLevel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList rblIceLevel;
-
-        /// <summary>
-        /// pnlDessertOptions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDessertOptions;
-
-        /// <summary>
-        /// ddlDessertFlavor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDessertFlavor;
-
-        /// <summary>
-        /// cblDessertExtras control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblDessertExtras;
-
-        /// <summary>
-        /// pnlFoodOptions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlFoodOptions;
+        protected global::System.Web.UI.WebControls.Panel pnlFlavor;
 
         /// <summary>
         /// ddlFlavor control.
@@ -130,6 +76,15 @@ namespace WebApplication2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlFlavor;
+
+        /// <summary>
+        /// pnlExtras control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlExtras;
 
         /// <summary>
         /// cblExtras control.

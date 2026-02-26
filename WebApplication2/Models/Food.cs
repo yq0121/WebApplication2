@@ -13,5 +13,8 @@ namespace WebApplication2.Models
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public string Description { get; set; }
+        public List<string> Flavors { get; set; }
+        public List<string> Extras { get; set; }
+        public bool AllowSpecialRequest { get; set; }
     }
 }

@@ -42,16 +42,5 @@ namespace WebApplication2
                 lblCartCount.Visible = false;
             }
         }
-
-        //protected void btnsearch_click(object sender, eventargs e)
-        //{
-        //    string keyword = txtglobalsearch.text.trim();
-
-        //    if (!string.isnullorempty(keyword))
-        //    {
-        //        response.redirect("~/search.aspx?q=" + keyword);
-        //    }
-        //}
-
     }
 }
