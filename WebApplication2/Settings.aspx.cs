@@ -18,8 +18,16 @@ namespace WebApplication2
                 pnlGuest.Visible = isGuest;
                 pnlUser.Visible = !isGuest;
 
-                ddlTheme.SelectedValue = Session["Theme"]?.ToString() ?? "light";
-                ddlTheme.SelectedValue = Session["Lang"]?.ToString() ?? "en";
+                if (!isGuest)
+                {
+                    string theme = Session["Theme"]?.ToString() ?? "light";
+                    if (ddlTheme.Items.FindByValue(theme) != null) 
+                        ddlTheme.SelectedValue = theme;
+
+                    string lang = Session["Lang"]?.ToString() ?? "en";
+                    if (ddlLang.Items.FindByValue(lang) != null)
+                        ddlLang.SelectedValue = lang;
+                }
             }
         }
 
@@ -27,6 +35,8 @@ namespace WebApplication2
         {
             Session["Theme"] = ddlTheme.SelectedValue;
             Session["Lang"] = ddlLang.SelectedValue;
+
+            lblMsg.Text = "✅ Settings saved successfully!";
         }
     }
 }

@@ -42,5 +42,15 @@ namespace WebApplication2
                 lblCartCount.Visible = false;
             }
         }
+
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            string theme = Session["Theme"]?.ToString() ?? "light";
+
+            if (theme == "dark")
+                Page.Theme = "DarkTheme";
+            else
+                Page.Theme = "LightTheme";
+        }
     }
 }
